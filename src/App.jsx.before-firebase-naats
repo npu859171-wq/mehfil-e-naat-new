@@ -1,0 +1,241 @@
+import { useState } from "react";
+import "./App.css";
+import AdminPanel from "./AdminPanel";
+
+const naats = [
+  {
+    id: 1,
+    title: "مصطفیٰ جانِ رحمت پہ لاکھوں سلام",
+    poet: "اعلیٰ حضرت امام احمد رضا خان",
+    category: "سلام",
+    text: "مصطفیٰ جانِ رحمت پہ لاکھوں سلام\nشمعِ بزمِ ہدایت پہ لاکھوں سلام"
+  },
+  {
+    id: 2,
+    title: "وہ سوئے لالہ زار پھرتے ہیں",
+    poet: "امام احمد رضا خان",
+    category: "نعت",
+    text: "وہ سوئے لالہ زار پھرتے ہیں\nتیرے دن اے بہار پھرتے ہیں"
+  },
+  {
+    id: 3,
+    title: "سب سے اولیٰ و اعلیٰ ہمارا نبی",
+    poet: "مختلف نعت خواں",
+    category: "نعت",
+    text: "سب سے اولیٰ و اعلیٰ ہمارا نبی\nسب سے بالا و والا ہمارا نبی"
+  }
+];
+
+function App() {
+  const [showAdmin, setShowAdmin] = useState(false);
+  const [search, setSearch] = useState("");
+  const [favorites, setFavorites] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem("mehfilFavorites")) || [];
+    } catch {
+      return [];
+    }
+  });
+  const [showFavorites, setShowFavorites] = useState(false);
+  const [selectedNaat, setSelectedNaat] = useState(null);
+
+  const toggleFavorite = (id) => {
+    const updated = favorites.includes(id)
+      ? favorites.filter((item) => item !== id)
+      : [...favorites, id];
+
+    setFavorites(updated);
+    localStorage.setItem("mehfilFavorites", JSON.stringify(updated));
+  };
+
+  const filteredNaats = naats.filter((naat) => {
+    const searchableText =
+      `${naat.title} ${naat.poet} ${naat.category} ${naat.text}`.toLowerCase();
+
+    return (
+      searchableText.includes(search.toLowerCase()) &&
+      (!showFavorites || favorites.includes(naat.id))
+    );
+  });
+
+  const copyNaat = async (naat) => {
+    try {
+      await navigator.clipboard.writeText(
+        `${naat.title}\n${naat.poet}\n\n${naat.text}`
+      );
+      alert("نعت کا متن کاپی ہوگیا!");
+    } catch {
+      alert(naat.text);
+    }
+  };
+
+  const downloadNaat = (naat) => {
+    const content = `${naat.title}\nشاعر: ${naat.poet}\n\n${naat.text}`;
+    const blob = new Blob(["\uFEFF" + content], {
+      type: "text/plain;charset=utf-8"
+    });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `${naat.title}.txt`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  if (showAdmin) return <AdminPanel onClose={() => setShowAdmin(false)} />;
+
+  if (selectedNaat) {
+    return (
+      <div className="app" dir="rtl">
+        <header className="site-header">
+          <div className="brand">
+            <div className="brand-icon">ﷺ</div>
+            <div>
+              <h1>محفلِ نعت</h1>
+              <p>محبتِ رسول ﷺ کا خوبصورت گوشہ</p>
+            </div>
+          </div>
+          <button className="favorite-filter" onClick={() => setSelectedNaat(null)}>
+            ← تمام نعتیں
+          </button>
+        </header>
+        <main>
+          <section className="full-naat">
+            <p className="eyebrow">{selectedNaat.category}</p>
+            <h2>{selectedNaat.title}</h2>
+            <p className="poet">شاعر: {selectedNaat.poet}</p>
+            <div className="full-naat-text">{selectedNaat.text}</div>
+            <div className="card-actions">
+              <button onClick={() => copyNaat(selectedNaat)}>متن کاپی کریں</button>
+              <button onClick={() => downloadNaat(selectedNaat)}>TXT ڈاؤن لوڈ</button>
+              <button onClick={() => toggleFavorite(selectedNaat.id)}>
+                {favorites.includes(selectedNaat.id) ? "♥ پسندیدہ میں شامل ہے" : "♡ پسندیدہ میں شامل کریں"}
+              </button>
+            </div>
+            <button className="back-button" onClick={() => setSelectedNaat(null)}>
+              ← نعتوں کی فہرست میں واپس جائیں
+            </button>
+          </section>
+        </main>
+        <footer className="site-footer">
+          <p>محفلِ نعت ﷺ</p>
+          <span>تمام محبتیں آقا کریم ﷺ کے نام</span>
+        </footer>
+      </div>
+    );
+  }
+
+  return (
+    <div className="app" dir="rtl">
+      <header className="site-header">
+        <div className="brand">
+          <div
+              className="brand-icon"
+              style={{ touchAction: "none", userSelect: "none", WebkitUserSelect: "none" }}
+              onContextMenu={(e) => e.preventDefault()}
+              onTouchStart={(e) => {
+                e.preventDefault();
+                window.__adminHoldTimer = setTimeout(() => setShowAdmin(true), 20000);
+              }}
+              onTouchEnd={() => clearTimeout(window.__adminHoldTimer)}
+              onTouchCancel={() => clearTimeout(window.__adminHoldTimer)}
+              onMouseDown={(e) => {
+                e.preventDefault();
+                window.__adminHoldTimer = setTimeout(() => setShowAdmin(true), 20000);
+              }}
+              onMouseUp={() => clearTimeout(window.__adminHoldTimer)}
+              onMouseLeave={() => clearTimeout(window.__adminHoldTimer)}
+            >ﷺ</div>
+          <div>
+            <h1>محفلِ نعت</h1>
+            <p>محبتِ رسول ﷺ کا خوبصورت گوشہ</p>
+          </div>
+        </div>
+        <button
+          className="favorite-filter"
+          onClick={() => setShowFavorites(!showFavorites)}
+        >
+          {showFavorites ? "تمام نعتیں" : `پسندیدہ نعتیں (${favorites.length})`}
+        </button>
+      </header>
+
+      <main>
+        <section className="hero">
+          <div className="hero-decoration">ﷺ</div>
+          <p className="eyebrow">خوش آمدید</p>
+          <h2>ذکرِ مصطفیٰ ﷺ سے دلوں کو روشن کریں</h2>
+          <p className="hero-text">
+            خوبصورت نعتوں کو پڑھیے، تلاش کیجیے اور اپنے پیاروں کے ساتھ شیئر کیجیے۔
+          </p>
+          <a className="hero-button" href="#naats">نعتیں پڑھیے ↓</a>
+        </section>
+
+        <section className="naat-section" id="naats">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">نعتیہ کلام</p>
+              <h2>{showFavorites ? "آپ کی پسندیدہ نعتیں" : "منتخب نعتیں"}</h2>
+            </div>
+            <span className="naat-count">{filteredNaats.length} نعتیں</span>
+          </div>
+
+          <input
+            className="search-input"
+            type="search"
+            placeholder="نعت، شاعر یا کلام کے الفاظ تلاش کریں..."
+            value={search}
+            onChange={(event) => setSearch(event.target.value)}
+            aria-label="نعت تلاش کریں"
+          />
+
+          <div className="naat-grid">
+            {filteredNaats.map((naat) => (
+              <article className="naat-card" key={naat.id}>
+                <div className="card-top">
+                  <span className="category">{naat.category}</span>
+                  <button
+                    className={`heart ${favorites.includes(naat.id) ? "active" : ""}`}
+                    onClick={() => toggleFavorite(naat.id)}
+                    aria-label="پسندیدہ میں شامل کریں"
+                  >
+                    {favorites.includes(naat.id) ? "♥" : "♡"}
+                  </button>
+                </div>
+                <h3>{naat.title}</h3>
+                <p className="poet">شاعر: {naat.poet}</p>
+                <p className="naat-text">{naat.text}</p>
+                <button
+                  className="read-naat-button"
+                  onClick={() => setSelectedNaat(naat)}
+                >
+                  📖 مکمل نعت پڑھیں
+                </button>
+                <div className="card-actions">
+                  <button onClick={() => copyNaat(naat)}>متن کاپی کریں</button>
+                  <button onClick={() => downloadNaat(naat)}>TXT ڈاؤن لوڈ</button>
+                </div>
+              </article>
+            ))}
+          </div>
+
+          {filteredNaats.length === 0 && (
+            <p className="empty-message">کوئی نعت نہیں ملی۔ دوسرا لفظ تلاش کریں۔</p>
+          )}
+        </section>
+
+        <section className="suggestion-box">
+          <span>✦</span>
+          <h2>آپ کی پسند، ہماری محفل</h2>
+          <p>جلد یہاں نئی نعتیں اور مزید موضوعات شامل کیے جائیں گے، ان شاء اللہ۔</p>
+        </section>
+      </main>
+
+      <footer className="site-footer">
+        <p>محفلِ نعت ﷺ</p>
+        <span>تمام محبتیں آقا کریم ﷺ کے نام</span>
+      </footer>
+    </div>
+  );
+}
+
+export default App;

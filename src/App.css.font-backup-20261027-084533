@@ -1,0 +1,733 @@
+.app {
+  min-height: 100vh;
+  overflow: hidden;
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(34, 111, 72, .22), transparent 55%),
+    #071c14;
+}
+
+.site-header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding: 18px max(5%, calc((100% - 1180px) / 2));
+  background: rgba(5, 23, 16, .96);
+  border-bottom: 1px solid rgba(220, 190, 113, .45);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  flex-shrink: 0;
+  border: 1px solid #d9bd70;
+  border-radius: 50%;
+  color: #f3d98e;
+  background: #123d2b;
+  font-size: 28px;
+  box-shadow: 0 0 25px rgba(217, 189, 112, .12);
+}
+
+.brand h1 {
+  margin: 0;
+  color: #f1d68c;
+  font-size: clamp(22px, 4vw, 31px);
+  font-weight: 700;
+  line-height: 1.8;
+}
+
+.brand p {
+  margin: 0;
+  color: #c3cdbf;
+  font-size: 12px;
+}
+
+.favorite-filter {
+  padding: 10px 16px;
+  border: 1px solid #b99a4d;
+  border-radius: 30px;
+  color: #f2dda4;
+  background: #143b2b;
+  font-size: 12px;
+  transition: .2s ease;
+}
+
+.favorite-filter:hover {
+  background: #23563c;
+}
+
+main {
+  width: min(1120px, 90%);
+  margin: auto;
+}
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 70px 20px 75px;
+  margin-top: 30px;
+  overflow: hidden;
+  text-align: center;
+  border: 1px solid rgba(214, 184, 107, .28);
+  border-radius: 28px;
+  background:
+    radial-gradient(ellipse at center, rgba(37, 100, 63, .72), transparent 75%),
+    linear-gradient(145deg, #123b29, #092419 70%);
+}
+
+.hero::before,
+.hero::after {
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  content: "";
+  border: 1px solid rgba(223, 195, 119, .15);
+  border-radius: 50%;
+}
+
+.hero::before {
+  top: -100px;
+  right: -60px;
+}
+
+.hero::after {
+  bottom: -110px;
+  left: -50px;
+}
+
+.hero-decoration {
+  color: rgba(237, 209, 137, .14);
+  font-size: 65px;
+  line-height: 1.7;
+}
+
+.eyebrow {
+  margin: 0 0 10px;
+  color: #e7ca7d;
+  font-size: 14px;
+}
+
+.hero h2 {
+  max-width: 760px;
+  margin: 0;
+  color: #fff3d1;
+  font-size: clamp(25px, 5vw, 43px);
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+.hero-text {
+  max-width: 650px;
+  margin-top: 15px;
+  color: #d1ddce;
+  font-size: 14px;
+  line-height: 2.2;
+}
+
+.hero-button {
+  display: inline-block;
+  margin-top: 27px;
+  padding: 12px 28px;
+  border: 1px solid #f0d58c;
+  border-radius: 30px;
+  color: #172719;
+  background: linear-gradient(135deg, #f5dfa0, #c7a34d);
+  font-size: 14px;
+  box-shadow: 0 7px 25px rgba(0, 0, 0, .2);
+  transition: transform .2s, box-shadow .2s;
+}
+
+.hero-button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .3);
+}
+
+.naat-section {
+  padding: 55px 0;
+}
+
+.section-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 22px;
+}
+
+.section-heading h2 {
+  margin: 0;
+  color: #fff0c9;
+  font-size: clamp(23px, 4vw, 32px);
+  font-weight: 700;
+  line-height: 1.9;
+}
+
+.naat-count {
+  padding: 7px 14px;
+  border: 1px solid rgba(217, 189, 112, .35);
+  border-radius: 25px;
+  color: #e7cc85;
+  background: rgba(19, 59, 40, .7);
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.search-input {
+  display: block;
+  width: 100%;
+  min-height: 56px;
+  padding: 12px 20px;
+  margin-bottom: 26px;
+  border: 1px solid #355845;
+  border-radius: 15px;
+  outline: none;
+  color: #fff4d7;
+  background: #102c20;
+  font-size: 13px;
+  text-align: right;
+  transition: border-color .2s, box-shadow .2s;
+}
+
+.search-input::placeholder {
+  color: #a7b7a9;
+}
+
+.search-input:focus {
+  border-color: #d4b767;
+  box-shadow: 0 0 0 3px rgba(212, 183, 103, .1);
+}
+
+.naat-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.naat-card {
+  padding: 24px;
+  border: 1px solid rgba(204, 180, 111, .25);
+  border-radius: 20px;
+  background: linear-gradient(145deg, #123526, #0c261b);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, .13);
+  transition: transform .2s, border-color .2s;
+}
+
+.naat-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(224, 196, 119, .7);
+}
+
+.card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.category {
+  display: inline-block;
+  padding: 5px 13px;
+  border: 1px solid rgba(223, 196, 121, .35);
+  border-radius: 25px;
+  color: #e8d18e;
+  background: rgba(216, 184, 105, .08);
+  font-size: 11px;
+}
+
+.heart {
+  width: 38px;
+  height: 38px;
+  border: 1px solid #46634c;
+  border-radius: 50%;
+  color: #d5e0d1;
+  background: #183b29;
+  font-family: Arial, sans-serif;
+  font-size: 23px;
+}
+
+.heart.active {
+  color: #ff8c9d;
+  border-color: #9d5261;
+  background: #45242c;
+}
+
+.naat-card h3 {
+  margin: 17px 0 5px;
+  color: #f5dda0;
+  font-size: clamp(18px, 3vw, 23px);
+  font-weight: 700;
+  line-height: 2;
+}
+
+.poet {
+  color: #b8c9b7;
+  font-size: 12px;
+  line-height: 2;
+}
+
+.naat-text {
+  margin-top: 20px;
+  padding: 18px 12px;
+  border-right: 3px solid #c9aa5e;
+  border-radius: 0 10px 10px 0;
+  color: #f5f0df;
+  background: rgba(3, 17, 11, .35);
+  font-size: 16px;
+  line-height: 2.6;
+  white-space: pre-line;
+}
+
+.card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.card-actions button {
+  flex: 1;
+  min-height: 43px;
+  padding: 8px 12px;
+  border: 1px solid #42664b;
+  border-radius: 11px;
+  color: #e5d49e;
+  background: #173b29;
+  font-size: 12px;
+  transition: .2s;
+}
+
+.card-actions button:hover {
+  border-color: #d8ba6e;
+  background: #245139;
+}
+
+.empty-message {
+  padding: 30px 15px;
+  border: 1px dashed #46664d;
+  border-radius: 15px;
+  color: #d2dcca;
+  text-align: center;
+}
+
+.suggestion-box {
+  padding: 30px 20px;
+  margin: 5px 0 45px;
+  border: 1px solid rgba(218, 189, 112, .25);
+  border-radius: 20px;
+  background: linear-gradient(120deg, #103322, #0c281c);
+  text-align: center;
+}
+
+.suggestion-box > span {
+  color: #e8cc81;
+  font-size: 28px;
+}
+
+.suggestion-box h2 {
+  margin: 8px 0;
+  color: #f0d794;
+  font-size: 23px;
+  line-height: 2;
+}
+
+.suggestion-box p {
+  color: #c8d4c5;
+  font-size: 13px;
+  line-height: 2.2;
+}
+
+.site-footer {
+  padding: 28px 16px;
+  border-top: 1px solid rgba(216, 188, 111, .35);
+  background: #04150e;
+  text-align: center;
+}
+
+.site-footer p {
+  color: #e8cb7f;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 2;
+}
+
+.site-footer span {
+  color: #a9b9a8;
+  font-size: 12px;
+}
+
+@media (max-width: 650px) {
+  .site-header {
+    padding: 13px 5%;
+    gap: 8px;
+  }
+
+  .brand {
+    gap: 9px;
+  }
+
+  .brand-icon {
+    width: 44px;
+    height: 44px;
+    font-size: 21px;
+  }
+
+  .brand h1 {
+    font-size: 20px;
+  }
+
+  .brand p {
+    max-width: 175px;
+    font-size: 10px;
+  }
+
+  .favorite-filter {
+    max-width: 135px;
+    padding: 8px 10px;
+    font-size: 10px;
+  }
+
+  main {
+    width: 92%;
+  }
+
+  .hero {
+    padding: 38px 17px 43px;
+    margin-top: 17px;
+    border-radius: 20px;
+  }
+
+  .hero-decoration {
+    font-size: 48px;
+  }
+
+  .hero h2 {
+    font-size: 25px;
+    line-height: 2;
+  }
+
+  .hero-text {
+    font-size: 12px;
+  }
+
+  .naat-section {
+    padding: 38px 0;
+  }
+
+  .naat-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .naat-card {
+    padding: 19px;
+  }
+
+  .naat-card h3 {
+    font-size: 19px;
+  }
+
+  .naat-text {
+    font-size: 15px;
+  }
+
+  .suggestion-box {
+    padding: 25px 16px;
+    margin-bottom: 30px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    transition-duration: .01ms !important;
+    animation-duration: .01ms !important;
+  }
+}
+
+.full-naat {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 30px 22px;
+  background: rgba(15, 48, 36, 0.96);
+  border: 1px solid rgba(220, 183, 95, 0.45);
+  border-radius: 22px;
+  text-align: center;
+}
+
+.full-naat h2 {
+  color: #e8c779;
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1.8;
+}
+
+.full-naat-text {
+  white-space: pre-line;
+  color: #fff8e7;
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 2.3;
+  padding: 25px 10px;
+  margin: 20px 0;
+  border-top: 1px solid rgba(220, 183, 95, 0.3);
+  border-bottom: 1px solid rgba(220, 183, 95, 0.3);
+}
+
+.full-naat .card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.full-naat .card-actions button,
+.back-button {
+  cursor: pointer;
+  border: 1px solid #d9b65d;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font: inherit;
+}
+
+.back-button {
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .full-naat {
+    margin: 18px 10px;
+    padding: 22px 14px;
+  }
+
+  .full-naat .card-actions {
+    flex-direction: column;
+  }
+
+  .full-naat .card-actions button {
+    width: 100%;
+  }
+}
+
+.full-naat {
+  max-width: 850px;
+  margin: 35px auto;
+  padding: 30px 22px;
+  background: rgba(15, 48, 36, 0.96);
+  border: 1px solid rgba(220, 183, 95, 0.45);
+  border-radius: 22px;
+  text-align: center;
+}
+
+.full-naat h2 {
+  color: #e8c779;
+  font-size: clamp(26px, 5vw, 40px);
+  line-height: 1.8;
+}
+
+.full-naat-text {
+  white-space: pre-line;
+  color: #fff8e7;
+  font-size: clamp(22px, 4vw, 30px);
+  line-height: 2.3;
+  padding: 25px 10px;
+  margin: 20px 0;
+  border-top: 1px solid rgba(220, 183, 95, 0.3);
+  border-bottom: 1px solid rgba(220, 183, 95, 0.3);
+}
+
+.full-naat .card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 22px 0;
+}
+
+.full-naat .card-actions button,
+.back-button {
+  cursor: pointer;
+  border: 1px solid #d9b65d;
+  border-radius: 10px;
+  padding: 12px 16px;
+  font: inherit;
+}
+
+.back-button {
+  margin-top: 12px;
+}
+
+@media (max-width: 600px) {
+  .full-naat {
+    margin: 18px 10px;
+    padding: 22px 14px;
+  }
+
+  .full-naat .card-actions {
+    flex-direction: column;
+  }
+
+  .full-naat .card-actions button {
+    width: 100%;
+  }
+}
+
+/* Urdu text readability improvements */
+.naat-text,
+.full-naat-text {
+  font-family: Arial, "Noto Naskh Arabic", serif;
+  font-size: 18px;
+  font-weight: 400;
+  letter-spacing: normal;
+  line-height: 2;
+  overflow-wrap: anywhere;
+  word-break: normal;
+  white-space: pre-line;
+}
+
+.naat-text {
+  text-align: center;
+}
+
+.full-naat-text {
+  text-align: center;
+  font-size: clamp(19px, 4.5vw, 25px);
+  line-height: 2.2;
+}
+
+.naat-card h3,
+.full-naat h2 {
+  overflow-wrap: anywhere;
+  word-break: normal;
+  line-height: 1.8;
+}
+
+@media (max-width: 480px) {
+  .naat-text {
+    font-size: 16px;
+    line-height: 2.1;
+  }
+
+  .full-naat-text {
+    font-size: 19px;
+    line-height: 2.2;
+  }
+}
+
+/* Mehfil-e-Naat: accessibility and mobile polish */
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+button {
+  cursor: pointer;
+}
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible {
+  outline: 3px solid #f0d58c;
+  outline-offset: 3px;
+}
+
+button:active {
+  transform: scale(0.98);
+}
+
+.naat-card,
+.full-naat,
+.suggestion-box {
+  overflow-wrap: anywhere;
+}
+
+.naat-card .read-naat-button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: 16px;
+  padding: 10px 16px;
+  border: 1px solid #d9bd70;
+  border-radius: 12px;
+  color: #172719;
+  background: linear-gradient(135deg, #f5dfa0, #c7a34d);
+  font-size: 14px;
+  font-weight: 700;
+  transition: filter 0.2s ease;
+}
+
+.naat-card .read-naat-button:hover {
+  filter: brightness(1.08);
+}
+
+.heart,
+.favorite-filter,
+.card-actions button,
+.back-button {
+  min-height: 44px;
+}
+
+.full-naat {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.full-naat .back-button {
+  max-width: 100%;
+  color: #f5dda0;
+  background: #173b29;
+}
+
+@media (max-width: 650px) {
+  .site-header {
+    flex-wrap: wrap;
+  }
+
+  .favorite-filter {
+    min-height: 44px;
+  }
+
+  .section-heading {
+    align-items: flex-start;
+  }
+
+  .naat-card .card-actions button {
+    min-width: 120px;
+  }
+
+  .full-naat {
+    margin: 20px auto;
+    padding: 22px 15px;
+    border-radius: 18px;
+  }
+
+  .full-naat h2 {
+    font-size: 25px;
+  }
+
+  .full-naat-text {
+    font-size: 21px;
+    line-height: 2.2;
+    overflow-wrap: anywhere;
+  }
+
+  .full-naat .card-actions button,
+  .full-naat .back-button {
+    width: 100%;
+    min-height: 46px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  button:active {
+    transform: none;
+  }
+}
